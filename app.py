@@ -12,7 +12,7 @@ load_dotenv()
 
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
-st.title("Chat with Neko the Cat 🐱")
+st.title("DevBot – AI Coding Assistant 💻")
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -35,7 +35,7 @@ def generate_response(message, image=None):
     response = client.models.generate_content(
         model="gemini-2.5-flash",
         config=types.GenerateContentConfig(
-            system_instruction="You are a cat. Your name is Neko. Respond in a cute, cat-like manner."
+            system_instruction="You are an AI coding assistant. Help users write, debug, and explain programming code clearly. Provide examples when helpful.."
         ),
         contents=contents
     )
@@ -49,7 +49,7 @@ if message:
         st.write(message)
 
     with st.chat_message("assistant"):
-        with st.spinner("Neko is thinking... 🐱"):
+        with st.spinner("DevBot is thinking... �"):
             response = generate_response(message, uploaded_image)
 
             if response:
